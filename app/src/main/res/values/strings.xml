@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Gatherer</string>
+
+    <string name="app_name" translatable="false">Gatherer</string>
+    <string name="about_emoticons" translatable="false">🌳🌳🍄🌳🌳</string>
+
+    <string name="everything_about_mushrooms">Wszystko o grzybach dla wszyskich!</string>
+    <string name="sign_in">Zaloguj</string>
+    <string name="sign_up">Zarejestruj</string>
+
 </resources>
