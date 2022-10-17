@@ -8,25 +8,24 @@
 
     <LinearLayout
         android:id="@+id/app_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:drawableBottomCompat="@drawable/gatherer_logo_1"
             android:gravity="center"
-            android:textStyle="bold"
-            android:text="@string/app_name"
-            android:textSize="45sp"
-            android:textColor="@color/material_dynamic_primary0"
             android:paddingTop="24dp"
             android:paddingBottom="24dp"
-            />
+            android:text="@string/app_name"
+            android:textColor="@color/material_dynamic_primary0"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:drawableBottomCompat="@drawable/gatherer_logo_1" />
 
     </LinearLayout>
 
@@ -35,19 +34,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/app_name"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_name">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/material_dynamic_primary0"
             android:gravity="center"
             android:paddingTop="24dp"
             android:paddingBottom="16dp"
             android:text="@string/about_emoticons"
+            android:textColor="@color/material_dynamic_primary0"
             android:textSize="28sp"
 
             />
@@ -59,8 +57,8 @@
             android:gravity="center"
             android:paddingTop="16dp"
             android:paddingBottom="24dp"
-            android:textColor="@color/material_dynamic_primary0"
             android:text="@string/everything_about_mushrooms"
+            android:textColor="@color/material_dynamic_primary0"
             android:textSize="28sp" />
 
     </LinearLayout>
@@ -70,35 +68,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:paddingStart="55dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="55dp"
+        android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about"
-        android:paddingStart="55dp"
-        android:paddingEnd="55dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/about">
 
         <Button
             android:id="@+id/sign_in_button"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/sign_up_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in" />
+            android:text="@string/sign_in"
+            app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/sign_up_button"
-            app:layout_constraintTop_toBottomOf="@id/sign_in_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up" />
+            android:text="@string/sign_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sign_in_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
