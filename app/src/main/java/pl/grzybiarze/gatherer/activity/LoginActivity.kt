@@ -1,4 +1,4 @@
-package pl.grzybiarze.gatherer.Activity
+package pl.grzybiarze.gatherer.activity
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
