@@ -8,7 +8,9 @@
     <string name="sign_up">Zarejestruj</string>
 
     <string name="login_text">Logowanie\n 🍄👀</string>
+    <string name="registration_text">Rejestracja\n🌲🌲🚶</string>
     <string name="name">Nazwa</string>
+    <string name="email">Email</string>
     <string name="password">Hasło</string>
 
 </resources>
