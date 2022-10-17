@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "701681350576",
+    "project_id": "grzybiarze-99ce9",
+    "storage_bucket": "grzybiarze-99ce9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701681350576:android:25f3b558c7bf2734578875",
+        "android_client_info": {
+          "package_name": "pl.grzybiarze.gatherer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701681350576-fv5u06f575vf6jr0puvc5kqtkao8urbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb3QQ0JLj29XLmorZrvcvSx39K70BWRHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701681350576-fv5u06f575vf6jr0puvc5kqtkao8urbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
