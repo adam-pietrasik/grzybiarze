@@ -13,7 +13,7 @@ import pl.grzybiarze.gatherer.R
 
 class LoginActivity : AppCompatActivity() {
 
-    //private lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private val TAG = "LoginActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,28 +23,44 @@ class LoginActivity : AppCompatActivity() {
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val submit = findViewById<Button>(R.id.submit)
-        //auth = Firebase.auth
+        auth = Firebase.auth
 
         submit.setOnClickListener {
-            val usernameText = username.text.toString();
-            val passwordText = password.text.toString();
-            signIn(usernameText, passwordText);
+            val usernameText = username.text.toString()
+            val passwordText = password.text.toString()
+            signIn(usernameText, passwordText)
         }
     }
 
     private fun signIn(email: String, password: String) {
-       // auth.signInWithEmailAndPassword(email, password)
-       //     .addOnCompleteListener(this) { task ->
-       //         if (task.isSuccessful) {
-       //             Log.d(TAG, "signInWithEmail:success")
-       //             val user = auth.currentUser
-       //         } else {
-       //             Log.w(TAG, "signInWithEmail:failure", task.exception)
-       //             Toast.makeText(
-       //                 baseContext, "Authentication failed.",
-       //                 Toast.LENGTH_SHORT
-       //             ).show()
-       //         }
-       //     }
+        if (!validateData(email, password)) {
+            Log.d(TAG, "signInWithEmail:emptyData")
+            Toast.makeText(
+                baseContext, "email and password can't be empty.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "signInWithEmail:success " + auth.currentUser?.email)
+                    Toast.makeText(
+                        baseContext, "Authentication success. " + auth.currentUser?.email,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Log.w(TAG, "signInWithEmail:failure " + auth.currentUser?.email, task.exception)
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+    private fun validateData(email: String, password: String) : Boolean{
+        return !(email.isEmpty() && password.isEmpty())
     }
 }
