@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         if (!validateData(email, password)) {
             Log.d(TAG, "signInWithEmail:emptyData")
             Toast.makeText(
-                baseContext, "email and password can't be empty.",
+                baseContext, R.string.sign_in_empty_password_or_email,
                 Toast.LENGTH_SHORT
             ).show()
             return
@@ -47,13 +47,13 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithEmail:success " + auth.currentUser?.email)
                     Toast.makeText(
-                        baseContext, "Authentication success. " + auth.currentUser?.email,
+                        baseContext, R.string.sign_in_success,
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     Log.w(TAG, "signInWithEmail:failure " + auth.currentUser?.email, task.exception)
                     Toast.makeText(
-                        baseContext, "Authentication failed.",
+                        baseContext, R.string.sign_in_failed,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

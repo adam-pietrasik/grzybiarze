@@ -11,4 +11,8 @@
     <string name="name">Nazwa</string>
     <string name="password">Hasło</string>
 
+    <string name="sign_in_empty_password_or_email">email and password can\'t be empty.</string>
+    <string name="sign_in_success">Authentication success.</string>
+    <string name="sign_in_failed">Authentication failed.</string>
+
 </resources>
