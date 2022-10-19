@@ -8,9 +8,14 @@
     <string name="sign_up">Zarejestruj</string>
 
     <string name="login_text">Logowanie\n 🍄👀</string>
+    <string name="registration_text">Rejestracja\n🌲🌲🚶</string>
     <string name="name">Nazwa</string>
+    <string name="email">Email</string>
     <string name="password">Hasło</string>
 
+    <string name="authentication_failed">Authentication failed</string>
+    <string name="user_created">User created</string>
+    
     <string name="sign_in_empty_password_or_email">email and password can\'t be empty.</string>
     <string name="sign_in_success">Authentication success.</string>
     <string name="sign_in_failed">Authentication failed.</string>

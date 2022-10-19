@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <LinearLayout
         android:id="@+id/app_name"
@@ -22,7 +22,6 @@
             android:paddingTop="24dp"
             android:paddingBottom="24dp"
             android:text="@string/app_name"
-            android:textColor="@color/material_dynamic_primary0"
             android:textSize="45sp"
             android:textStyle="bold"
             app:drawableBottomCompat="@drawable/gatherer_logo_1" />
@@ -45,7 +44,6 @@
             android:paddingTop="24dp"
             android:paddingBottom="16dp"
             android:text="@string/about_emoticons"
-            android:textColor="@color/material_dynamic_primary0"
             android:textSize="28sp"
 
             />
@@ -58,7 +56,6 @@
             android:paddingTop="16dp"
             android:paddingBottom="24dp"
             android:text="@string/everything_about_mushrooms"
-            android:textColor="@color/material_dynamic_primary0"
             android:textSize="28sp" />
 
     </LinearLayout>

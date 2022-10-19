@@ -1,10 +1,10 @@
-package pl.grzybiarze.gatherer
+package pl.grzybiarze.gatherer.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import pl.grzybiarze.gatherer.activity.LoginActivity
+import pl.grzybiarze.gatherer.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +21,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        // TODO: Create registration activity and pinup it to this button
         val signUpButton = findViewById<Button>(R.id.sign_up_button)
+            .setOnClickListener {
+                Intent(this, RegisterActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
     }
 }

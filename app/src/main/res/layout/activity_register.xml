@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.RegisterActivity">
 
     <LinearLayout
         android:id="@+id/logo_layout"
@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="@color/material_dynamic_primary0"
             android:textSize="45sp"
             android:textStyle="bold"
             app:drawableBottomCompat="@drawable/gatherer_logo_1" />
@@ -28,10 +27,10 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingStart="11dp"
+        android:paddingTop="25dp"
         android:paddingEnd="11dp"
         android:paddingBottom="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,15 +39,13 @@
         app:layout_constraintTop_toBottomOf="@+id/logo_layout">
 
         <TextView
-            android:id="@+id/login_text"
+            android:id="@+id/registration_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/login_text"
-            android:textColor="@color/material_dynamic_primary0"
+            android:text="@string/registration_text"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/username_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,10 +57,10 @@
             android:hint="@string/name"
             app:endIconDrawable="@drawable/ic_cancel_24px"
             app:endIconMode="clear_text"
-            app:layout_constraintBottom_toTopOf="@id/password_layout"
+            app:layout_constraintBottom_toTopOf="@id/email_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_text"
+            app:layout_constraintTop_toBottomOf="@+id/registration_text"
             app:placeholderText="Login">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -72,6 +69,27 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:maxLength="25" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            app:endIconDrawable="@drawable/ic_cancel_24px"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@id/password_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_layout"
+            app:placeholderText="Email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +103,7 @@
             app:layout_constraintBottom_toTopOf="@id/submit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_layout"
+            app:layout_constraintTop_toBottomOf="@+id/email_layout"
             app:placeholderText="Login">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +119,7 @@
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in"
+            android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
