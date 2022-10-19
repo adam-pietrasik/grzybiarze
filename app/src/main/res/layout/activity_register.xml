@@ -20,9 +20,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/app_name"
-            app:drawableBottomCompat="@drawable/gatherer_logo_1"
             android:textSize="45sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:drawableBottomCompat="@drawable/gatherer_logo_1" />
 
     </LinearLayout>
 
@@ -30,14 +30,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingStart="11dp"
+        android:paddingTop="25dp"
         android:paddingEnd="11dp"
         android:paddingBottom="18dp"
-        android:paddingTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_layout"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/logo_layout">
 
         <TextView
             android:id="@+id/registration_text"
@@ -45,11 +44,11 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/registration_text"
+            android:textSize="22sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_layout"
@@ -68,8 +67,8 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="25"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:maxLength="25" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,8 +110,8 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="25"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="25" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
