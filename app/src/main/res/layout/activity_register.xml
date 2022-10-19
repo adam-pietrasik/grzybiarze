@@ -68,6 +68,7 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="25"
                 android:inputType="textPersonName" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -110,6 +111,7 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="25"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
