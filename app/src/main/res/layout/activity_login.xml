@@ -20,10 +20,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/app_name"
-            app:drawableBottomCompat="@drawable/gatherer_logo_1"
+            android:textColor="@color/material_dynamic_primary0"
             android:textSize="45sp"
             android:textStyle="bold"
-            android:textColor="@color/material_dynamic_primary0" />
+            app:drawableBottomCompat="@drawable/gatherer_logo_1" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,13 +45,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/login_text"
+            android:textColor="@color/material_dynamic_primary0"
+            android:textSize="22sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/username_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/material_dynamic_primary0"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_layout"
@@ -70,7 +70,8 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:maxLength="25" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -90,14 +91,15 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="25" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Zaloguj"
+            android:text="@string/sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
