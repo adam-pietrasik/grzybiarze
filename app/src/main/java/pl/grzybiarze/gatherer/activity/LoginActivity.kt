@@ -61,6 +61,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun validateData(email: String, password: String) : Boolean{
-        return !(email.isEmpty() && password.isEmpty())
+        return !(email.isEmpty() || password.isEmpty())
     }
 }
