@@ -13,4 +13,8 @@
     <string name="email">Email</string>
     <string name="password">Hasło</string>
 
+    <string name="authentication_failed">Authentication failed</string>
+    <string name="user_created">User created</string>
+    <string name="sign_in_empty_password_or_email">email and password can\'t be empty.</string>
+
 </resources>
