@@ -49,6 +49,7 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
             val emailText = email.text.toString()
             if (validateData(emailText)) {
                 sendPassword(emailText)
+                resetPassword.isEnabled = false
             } else {
                 Toast.makeText(context, context.getText(R.string.empty_email), Toast.LENGTH_SHORT)
                     .show()
@@ -84,6 +85,7 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
                         context.getText(R.string.wrong_email),
                         Toast.LENGTH_SHORT
                     ).show()
+                    resetPassword.isEnabled = true
                 }
             }
     }
