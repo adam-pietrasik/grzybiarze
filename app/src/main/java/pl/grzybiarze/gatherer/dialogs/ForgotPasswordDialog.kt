@@ -1,16 +1,12 @@
 package pl.grzybiarze.gatherer.dialogs
 
-import android.animation.ArgbEvaluator
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.view.WindowManager
+import android.widget.*
 import androidx.core.graphics.ColorUtils
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +27,7 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate()")
 
         setContentView(R.layout.dialog_forgot_password)
         setBackgroundColor()
@@ -44,13 +41,16 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
 
         auth = Firebase.auth
 
+        this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+        this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+
         resetPassword.setOnClickListener {
             val emailText = email.text.toString()
             if (validateData(emailText)) {
                 sendPassword(emailText)
-            }
-            else {
-                Toast.makeText(context, context.getText(R.string.empty_email), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, context.getText(R.string.empty_email), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -61,11 +61,12 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
             ColorUtils.blendARGB(
                 context.getColor(R.color.md_theme_dark_inversePrimary),
                 context.getColor(R.color.md_theme_light_surface),
-                0.89F)
+                0.89F
+            )
         )
     }
 
-    private fun validateData(email: String) : Boolean{
+    private fun validateData(email: String): Boolean {
         return email.isNotEmpty()
     }
 
@@ -75,10 +76,13 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
                 if (task.isSuccessful) {
                     Log.d(TAG, "sendPassword() successfully sent password reset")
                     changeLayout()
-                }
-                else {
+                } else {
                     Log.w(TAG, "sendPassword() something went wrong")
-                    Toast.makeText(context, context.getText(R.string.wrong_email), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getText(R.string.wrong_email),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -92,6 +96,11 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
         exit.setOnClickListener {
             this.cancel()
         }
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        Log.d(TAG, "dismiss()")
     }
 
 }
