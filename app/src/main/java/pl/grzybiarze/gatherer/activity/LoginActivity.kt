@@ -1,5 +1,6 @@
 package pl.grzybiarze.gatherer.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -10,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pl.grzybiarze.gatherer.R
+import pl.grzybiarze.gatherer.dialogs.ForgotPasswordDialog
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,12 +25,18 @@ class LoginActivity : AppCompatActivity() {
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val submit = findViewById<Button>(R.id.submit)
+        val forgotPassword = findViewById<Button>(R.id.forgotPassword)
         auth = Firebase.auth
 
         submit.setOnClickListener {
             val usernameText = username.text.toString()
             val passwordText = password.text.toString()
             signIn(usernameText, passwordText)
+        }
+
+        forgotPassword.setOnClickListener {
+            val forgotPasswordDialog = ForgotPasswordDialog(this)
+            forgotPasswordDialog.show()
         }
     }
 
@@ -53,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Log.w(TAG, "signInWithEmail:failure " + auth.currentUser?.email, task.exception)
                     Toast.makeText(
-                        baseContext, R.string.sign_in_failed,
+                        baseContext, R.string.authentication_failed,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
