@@ -17,6 +17,7 @@ import pl.grzybiarze.gatherer.R
 class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
 
     val TAG = "ForgotPasswordDialog"
+    val COLOR_RATIO = 0.89F
 
     private lateinit var auth: FirebaseAuth
     private lateinit var userInfo: TextView
@@ -61,7 +62,7 @@ class ForgotPasswordDialog(context: Context) : AlertDialog(context) {
             ColorUtils.blendARGB(
                 context.getColor(R.color.md_theme_dark_inversePrimary),
                 context.getColor(R.color.md_theme_light_surface),
-                0.89F
+                COLOR_RATIO
             )
         )
     }
