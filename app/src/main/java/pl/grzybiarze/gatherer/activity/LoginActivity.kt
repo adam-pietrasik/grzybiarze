@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.dialogs.ForgotPasswordDialog
@@ -32,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
             val usernameText = username.text.toString()
             val passwordText = password.text.toString()
             signIn(usernameText, passwordText)
+            getUsers()
         }
 
         forgotPassword.setOnClickListener {
@@ -70,5 +72,20 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateData(email: String, password: String) : Boolean{
         return !(email.isEmpty() || password.isEmpty())
+    }
+
+    private fun getUsers() {
+        val db = Firebase.firestore
+
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
     }
 }
