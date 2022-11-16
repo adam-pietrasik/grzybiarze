@@ -1,6 +1,5 @@
 package pl.grzybiarze.gatherer.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -34,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
             val passwordText = password.text.toString()
             signIn(usernameText, passwordText)
             getUsers()
+            getUserInfo()
+            //deleteUser()
         }
 
         forgotPassword.setOnClickListener {
@@ -87,5 +88,42 @@ class LoginActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
             }
+    }
+
+    private fun getUserInfo() {
+        val user = Firebase.auth.currentUser
+
+        if(user != null) {
+            // Name, email address, and profile photo Url
+            val name = user.displayName
+            val email = user.email
+            val photoUrl = user.photoUrl
+
+            // Check if user's email is verified
+            val emailVerified = user.isEmailVerified
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            val uid = user.uid
+
+            Log.d(TAG, "Email: ${email.toString()}")
+            Log.d(TAG, "Name: ${name.toString()}")
+            Log.d(TAG, "Uid: $uid")
+        }
+    }
+
+    private fun deleteUser() {
+        // Delete users from authentication group
+        val user = Firebase.auth.currentUser
+        user?.delete()
+
+        // Connect to database
+        val db = Firebase.firestore
+
+        db.collection("users").document(user?.uid.toString())
+            .delete()
+            .addOnSuccessListener { Log.d(TAG, "User successfully deleted!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 }
