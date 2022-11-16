@@ -77,12 +77,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getUsers() {
         val db = Firebase.firestore
+        val user = Firebase.auth.currentUser
 
         db.collection("users")
             .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
                     Log.d(TAG, "${document.id} => ${document.data}")
+                    Log.d(TAG, "${user?.uid}")
+                    Log.d(TAG, (user?.uid == document.id).toString())
                 }
             }
             .addOnFailureListener { exception ->
@@ -91,8 +94,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun getUserInfo() {
-        val user = Firebase.auth.currentUser
 
+        val user = Firebase.auth.currentUser
         if(user != null) {
             // Name, email address, and profile photo Url
             val name = user.displayName
@@ -116,14 +119,20 @@ class LoginActivity : AppCompatActivity() {
     private fun deleteUser() {
         // Delete users from authentication group
         val user = Firebase.auth.currentUser
-        user?.delete()
 
         // Connect to database
         val db = Firebase.firestore
 
-        db.collection("users").document(user?.uid.toString())
-            .delete()
-            .addOnSuccessListener { Log.d(TAG, "User successfully deleted!") }
-            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+        if (user != null) {
+
+            user.delete()
+                .addOnSuccessListener { Log.d(TAG, "User successfully deleted from authentication group!") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error deleting user", e) }
+
+            db.collection("users").document(user.uid)
+                .delete()
+                .addOnSuccessListener { Log.d(TAG, "User successfully deleted!") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+        }
     }
 }
