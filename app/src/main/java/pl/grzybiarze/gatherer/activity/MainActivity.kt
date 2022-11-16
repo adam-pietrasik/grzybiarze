@@ -16,7 +16,11 @@ class MainActivity : AppCompatActivity() {
 
         val signInButton = findViewById<Button>(R.id.sign_in_button)
             .setOnClickListener {
-                Intent(this, LoginActivity::class.java).also {
+//                Intent(this, LoginActivity::class.java).also {
+//                    startActivity(it)
+//                }
+                // TODO: Get rid of this code after properly handling user logging
+                Intent(this, DashboardActivity::class.java).also {
                     startActivity(it)
                 }
             }
