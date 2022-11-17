@@ -55,14 +55,14 @@
             android:id="@+id/username_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name"
+            android:hint="@string/email"
             app:endIconDrawable="@drawable/ic_cancel_24px"
             app:endIconMode="clear_text"
             app:layout_constraintBottom_toTopOf="@id/password_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_text"
-            app:placeholderText="Login"
+            app:placeholderText="Email"
             style="@style/Widget.Material3.TextInputLayout.FilledBox">
 
             <com.google.android.material.textfield.TextInputEditText
