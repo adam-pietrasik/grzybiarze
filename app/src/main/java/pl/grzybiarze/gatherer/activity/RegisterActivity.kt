@@ -39,7 +39,8 @@ class RegisterActivity : AppCompatActivity() {
             val emailText = email.text.toString()
             val passwordText = password.text.toString()
             createAccount(emailText, passwordText)
-            createCollection(usernameText, emailText)
+            val uid = auth.uid.toString()
+            createCollection(usernameText, emailText, auth.uid.toString())
         }
     }
 
@@ -60,7 +61,7 @@ class RegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "createAccount() user successfully registered")
+                    Log.d(TAG, "createAccount() user successfully registered ${auth.uid}")
                     Toast.makeText(this, R.string.user_created, Toast.LENGTH_SHORT).show()
                     // TODO: go to main page
                 }
@@ -70,13 +71,14 @@ class RegisterActivity : AppCompatActivity() {
 
                 }
             }
+
     }
 
     private fun validateData(email: String, password: String) : Boolean{
         return !(email.isEmpty() && password.isEmpty())
     }
 
-    private fun createCollection(username: String, email: String) {
+    private fun createCollection(username: String, email: String, uid: String) {
         val db = Firebase.firestore
 
         // Create a new user with a first and last name
@@ -86,14 +88,18 @@ class RegisterActivity : AppCompatActivity() {
             "username" to username,
             "email" to email,
             "profilePicture" to null,
-            "isBanned" to null
+            "isBanned" to null,
+            "userId" to uid
         )
+
+        val uidCheck = uid
 
         // Add a new document with a generated ID
         db.collection("users")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            .document(uid)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d(TAG, "DocumentSnapshot added with ID: $uid")
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
