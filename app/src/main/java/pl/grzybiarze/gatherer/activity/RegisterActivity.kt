@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.grzybiarze.gatherer.R
 
@@ -38,6 +39,7 @@ class RegisterActivity : AppCompatActivity() {
             val emailText = email.text.toString()
             val passwordText = password.text.toString()
             createAccount(emailText, passwordText)
+            createCollection(usernameText, emailText)
         }
     }
 
@@ -54,6 +56,7 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.sign_in_empty_password_or_email, Toast.LENGTH_SHORT).show()
             return
         }
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -71,6 +74,30 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateData(email: String, password: String) : Boolean{
         return !(email.isEmpty() && password.isEmpty())
+    }
+
+    private fun createCollection(username: String, email: String) {
+        val db = Firebase.firestore
+
+        // Create a new user with a first and last name
+        val user = hashMapOf(
+            "firstName" to null,
+            "lastName" to null,
+            "username" to username,
+            "email" to email,
+            "profilePicture" to null,
+            "isBanned" to null
+        )
+
+        // Add a new document with a generated ID
+        db.collection("users")
+            .add(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
     }
 
 }
