@@ -38,9 +38,7 @@ class RegisterActivity : AppCompatActivity() {
             val usernameText = username.text.toString()
             val emailText = email.text.toString()
             val passwordText = password.text.toString()
-            createAccount(emailText, passwordText)
-            val uid = auth.uid.toString()
-            createCollection(usernameText, emailText, auth.uid.toString())
+            createAccount(usernameText, emailText, passwordText)
         }
     }
 
@@ -51,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
         // val currentUser = auth.currentUser
     }
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(username: String, email: String, password: String) {
         if (!validateData(email, password)) {
             Log.d(TAG, "createAccount() empty data passed")
             Toast.makeText(this, R.string.sign_in_empty_password_or_email, Toast.LENGTH_SHORT).show()
@@ -63,6 +61,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Log.d(TAG, "createAccount() user successfully registered ${auth.uid}")
                     Toast.makeText(this, R.string.user_created, Toast.LENGTH_SHORT).show()
+                    createCollection(username, email, auth.uid.toString())
                     // TODO: go to main page
                 }
                 else {
@@ -71,7 +70,6 @@ class RegisterActivity : AppCompatActivity() {
 
                 }
             }
-
     }
 
     private fun validateData(email: String, password: String) : Boolean{
@@ -89,10 +87,7 @@ class RegisterActivity : AppCompatActivity() {
             "email" to email,
             "profilePicture" to null,
             "isBanned" to null,
-            "userId" to uid
         )
-
-        val uidCheck = uid
 
         // Add a new document with a generated ID
         db.collection("users")
