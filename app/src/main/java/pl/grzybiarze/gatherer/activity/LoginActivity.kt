@@ -32,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
             val usernameText = username.text.toString()
             val passwordText = password.text.toString()
             signIn(usernameText, passwordText)
-            getUsers()
             getUserInfo()
             //deleteUser()
         }
@@ -75,27 +74,10 @@ class LoginActivity : AppCompatActivity() {
         return !(email.isEmpty() || password.isEmpty())
     }
 
-    private fun getUsers() {
+    private fun getUserInfo() {
         val db = Firebase.firestore
         val user = Firebase.auth.currentUser
 
-        db.collection("users")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                    Log.d(TAG, "${user?.uid}")
-                    Log.d(TAG, (user?.uid == document.id).toString())
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
-    }
-
-    private fun getUserInfo() {
-
-        val user = Firebase.auth.currentUser
         if(user != null) {
             // Name, email address, and profile photo Url
             val name = user.displayName
@@ -110,9 +92,19 @@ class LoginActivity : AppCompatActivity() {
             // FirebaseUser.getToken() instead.
             val uid = user.uid
 
-            Log.d(TAG, "Email: ${email.toString()}")
-            Log.d(TAG, "Name: ${name.toString()}")
-            Log.d(TAG, "Uid: $uid")
+            db.collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener {
+                    Log.d(TAG, "Email: ${email.toString()}")
+                    Log.d(TAG, "Name: ${name.toString()}")
+                    Log.d(TAG, "Uid: $uid")
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting user info.", exception)
+                }
+        } else {
+            Log.e(TAG, "User not found")
         }
     }
 
