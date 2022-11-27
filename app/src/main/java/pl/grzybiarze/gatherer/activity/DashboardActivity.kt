@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.adapters.FollowersAdapter
+import pl.grzybiarze.gatherer.adapters.PostAdapter
 import pl.grzybiarze.gatherer.helper_classes.Followers
+import pl.grzybiarze.gatherer.helper_classes.Post
+import java.text.DateFormat
+import java.util.*
 
 class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +31,38 @@ class DashboardActivity : AppCompatActivity() {
             Followers("TJ"),
         )
 
-        val adapter = FollowersAdapter(followers)
+        val followersAdapter = FollowersAdapter(followers)
         val recyclerViewFollowers = findViewById<RecyclerView>(R.id.userFollowers)
-        recyclerViewFollowers.adapter = adapter
+        recyclerViewFollowers.adapter = followersAdapter
         recyclerViewFollowers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        var posts = mutableListOf(
+            Post(5, 10,
+                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(2022, 11, 17)),
+                "Skierniewice",
+                "Kamil",
+                "KW",
+                "Grzyb"
+            ),
+            Post(5, 10,
+                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(2022, 11, 17)),
+                "Skierniewice",
+                "Kamil",
+                "KW",
+                "Grzyb"
+            ),
+            Post(5, 10,
+                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(2022, 11, 17)),
+                "Skierniewice",
+                "Kamil",
+                "KW",
+                "Grzyb"
+            )
+        )
+
+        val postAdapter = PostAdapter(posts)
+        val recyclerViewPosts = findViewById<RecyclerView>(R.id.usersPosts)
+        recyclerViewPosts.adapter = postAdapter
+        recyclerViewPosts.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 }

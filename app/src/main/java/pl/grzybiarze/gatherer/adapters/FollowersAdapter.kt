@@ -28,8 +28,6 @@ class FollowersAdapter(
     }
 
     override fun onBindViewHolder(holder: FollowersViewHolder, position: Int) {
-        holder.itemView.resources.getDrawable(R.drawable.user_profile_light_blue, null)
-
         holder.itemView.findViewById<TextView>(R.id.userProfile).apply {
             text = followers[position].initials
             background = getNameInitialBackground()
