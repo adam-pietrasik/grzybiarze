@@ -10,12 +10,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.grzybiarze.gatherer.R
+import pl.grzybiarze.gatherer.adapters.StatisticItemGridView
+import pl.grzybiarze.gatherer.data.StatisticItemModal
 import pl.grzybiarze.gatherer.dialogs.ForgotPasswordDialog
 
 class UserActivity : AppCompatActivity(){
 
     private val TAG = "UserActivity"
     private lateinit var auth: FirebaseAuth
+    lateinit var statisticGridView: StatisticItemGridView
+    lateinit var statisticItemModal: List<StatisticItemModal>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +31,6 @@ class UserActivity : AppCompatActivity(){
         submit.setOnClickListener {
             getUsers()
         }
-
-
     }
 
     private fun getUsers() {
