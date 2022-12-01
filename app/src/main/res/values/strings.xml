@@ -26,5 +26,6 @@
     <string name="wrong_email">Podano zły email</string>
 
     <string name="exit">Zamknij</string>
+    <string name="name_surname">Name/Surname</string>
 
 </resources>
