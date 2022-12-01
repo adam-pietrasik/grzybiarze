@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+    <item
+        android:title="Narzędzia">
+        <menu>
+            <item
+                android:id="@+id/nav_mapa"
+                android:title="Mapa"
+                android:icon="@drawable/gatherer_logo_1"
+
+                >
+            </item>
+            <item
+                android:id="@+id/nav_pogoda"
+                android:title="Pogoda"
+                android:icon="@drawable/gatherer_logo_1"
+                >
+            </item>
+            <item
+                android:id="@+id/nav_aparat"
+                android:title="Aparat"
+                android:icon="@drawable/gatherer_logo_1"
+                >
+            </item>
+        </menu>
+    </item>
+    <item
+        android:title="Aplikacja">
+        <menu>
+            <item
+                android:id="@+id/nav_ustawienia"
+                android:title="Ustawienia"
+                android:icon="@drawable/gatherer_logo_1"
+                >
+            </item>
+            <item
+                android:id="@+id/nav_about"
+                android:title="O Aplikacji"
+                android:icon="@drawable/gatherer_logo_1"
+                >
+            </item>
+        </menu>
+    </item>
+</menu>

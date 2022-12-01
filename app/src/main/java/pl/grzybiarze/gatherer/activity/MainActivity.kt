@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val signInButton = findViewById<Button>(R.id.sign_in_button)
             .setOnClickListener {
-                Intent(this, LoginActivity::class.java).also {
+                Intent(this, MenuActivity::class.java).also {
                     startActivity(it)
                 }
             }
