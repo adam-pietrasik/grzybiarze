@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import pl.grzybiarze.gatherer.R
-import pl.grzybiarze.gatherer.data.StatisticItemModal
+import pl.grzybiarze.gatherer.data.User
 
 class StatisticItemGridView(
-    private val statisticList: List<StatisticItemModal>,
+    private val statisticList: List<User>,
     private val context: Context
 ) : BaseAdapter() {
 
@@ -42,8 +42,8 @@ class StatisticItemGridView(
 
         statisticNumber = convertView2!!.findViewById(R.id.stat_value)
         statisticName = convertView2!!.findViewById(R.id.stat_name)
-        statisticName.setText(statisticList[position].name)
-        statisticNumber.setText(statisticList[position].number)
+        statisticName.text = statisticList[position].email
+        statisticNumber.text = statisticList[position].secondName
 
         return convertView2
     }

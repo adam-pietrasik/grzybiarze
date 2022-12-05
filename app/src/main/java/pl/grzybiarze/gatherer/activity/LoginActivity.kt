@@ -1,5 +1,6 @@
 package pl.grzybiarze.gatherer.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -32,8 +33,6 @@ class LoginActivity : AppCompatActivity() {
             val usernameText = username.text.toString()
             val passwordText = password.text.toString()
             signIn(usernameText, passwordText)
-            getUserInfo()
-            //deleteUser()
         }
 
         forgotPassword.setOnClickListener {
@@ -60,6 +59,9 @@ class LoginActivity : AppCompatActivity() {
                         baseContext, R.string.sign_in_success,
                         Toast.LENGTH_SHORT
                     ).show()
+                    Intent(this, UserActivity::class.java).also {
+                        startActivity(it)
+                    }
                 } else {
                     Log.w(TAG, "signInWithEmail:failure " + auth.currentUser?.email, task.exception)
                     Toast.makeText(
@@ -72,59 +74,5 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateData(email: String, password: String) : Boolean{
         return !(email.isEmpty() || password.isEmpty())
-    }
-
-    private fun getUserInfo() {
-        val db = Firebase.firestore
-        val user = Firebase.auth.currentUser
-
-        if(user != null) {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
-
-            // Check if user's email is verified
-            val emailVerified = user.isEmailVerified
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            val uid = user.uid
-
-            db.collection("users")
-                .document(uid)
-                .get()
-                .addOnSuccessListener {
-                    Log.d(TAG, "Email: ${email.toString()}")
-                    Log.d(TAG, "Name: ${name.toString()}")
-                    Log.d(TAG, "Uid: $uid")
-                }
-                .addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting user info.", exception)
-                }
-        } else {
-            Log.e(TAG, "User not found")
-        }
-    }
-
-    private fun deleteUser() {
-        // Delete users from authentication group
-        val user = Firebase.auth.currentUser
-
-        // Connect to database
-        val db = Firebase.firestore
-
-        if (user != null) {
-
-            user.delete()
-                .addOnSuccessListener { Log.d(TAG, "User successfully deleted from authentication group!") }
-                .addOnFailureListener { e -> Log.w(TAG, "Error deleting user", e) }
-
-            db.collection("users").document(user.uid)
-                .delete()
-                .addOnSuccessListener { Log.d(TAG, "User successfully deleted!") }
-                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
-        }
     }
 }
