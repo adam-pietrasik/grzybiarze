@@ -21,7 +21,7 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
         val data = ArrayList<MushroomElementModal>()
 
         for (i in 1..20){
-            data[i].name = "Mushroom $i"
+            data.add(MushroomElementModal("Dupa","Mushroom $i",true))
         }
 
         val adapter = AtlasRecyclerView(data)
