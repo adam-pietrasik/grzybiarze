@@ -24,13 +24,23 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
             data.add(MushroomElementModal("Dupa","Mushroom $i",true))
         }
 
-        val adapter = AtlasRecyclerView(data)
+        val adapter = AtlasRecyclerView(data,this)
 
         recyclerView.adapter = adapter
 
     }
 
+    //private fun replaceFragment(bundle: Bundle) {
+    //    val fragment: Fragment = MoreDetailsAboutTask()
+    //    fragment.arguments = bundle
+    //    getParentFragmentManager()
+    //        .beginTransaction()
+    //        .replace(R.id.mainLayout, fragment)
+    //        .setReorderingAllowed(true)
+    //        .commit()
+    //}
+
     override fun onClickItem(position: Int) {
-        TODO("Not yet implemented")
+        println(position)
     }
 }
