@@ -1,12 +1,15 @@
 package pl.grzybiarze.gatherer.helper_classes
 
+import android.net.Uri
+
 data class Post(
-    val numberOfLikes: Int,
-    val numberOfComments: Int,
-    val date: String,
-    val localization: String,
-    val postOwner: String,
-    val postOwnerPhoto: String,
-    val mushroomType: String
-    //val postPhoto: whatKindOfDatatype?
+    var numberOfLikes: Int,
+    var numberOfComments: Int,
+    var date: String,
+    var localization: String,
+    var postOwner: String,
+    var postOwnerPhoto: String,
+    var mushroomType: String,
+    var postText: String,
+    var postPicture: Uri?
 )

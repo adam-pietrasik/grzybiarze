@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="14"
+            android:text="0"
             android:textSize="22sp"
             />
 
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toStartOf="@id/numberOfPostComments"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:src="@drawable/person_outline_24px"
+            android:src="@drawable/star"
             android:backgroundTint="@color/md_theme_light_surface"
             />
 
@@ -76,7 +76,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/postCommentsBtn"
-            android:text="51"
+            android:text="0"
             android:textSize="22sp"
             />
 
@@ -88,7 +88,7 @@
             app:layout_constraintEnd_toStartOf="@id/numberOfPostLikes"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:src="@drawable/person_outline_24px"
+            android:src="@drawable/chat_bubble_outline"
             android:backgroundTint="@color/md_theme_light_surface"
             />
 
@@ -138,7 +138,7 @@
             app:layout_constraintStart_toEndOf="@id/postTimestamp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:drawableStartCompat="@drawable/person_outline_24px"
+            app:drawableStartCompat="@drawable/localization"
             android:drawablePadding="10dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -153,7 +153,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/postLocalization"
-            app:drawableStartCompat="@drawable/person_outline_24px"
+            app:drawableStartCompat="@drawable/book"
             android:drawablePadding="10dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"

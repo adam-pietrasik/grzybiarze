@@ -1,14 +1,16 @@
 package pl.grzybiarze.gatherer.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.helper_classes.Post
-import java.util.*
 
 class PostAdapter (
     var posts: List<Post>
@@ -42,6 +44,15 @@ class PostAdapter (
             }
             findViewById<TextView>(R.id.postMushroomType).apply {
                 text = posts[position].mushroomType
+            }
+        }
+        holder.itemView.findViewById<ImageView>(R.id.postImage).apply {
+            if (posts[position].postPicture != null) {
+                Log.w("TAG", "onBindViewHolder ${posts[position].postPicture}")
+                Picasso.with(context).load(posts[position].postPicture)
+                    .fit()
+                    .centerCrop()
+                    .into(this)
             }
         }
     }
