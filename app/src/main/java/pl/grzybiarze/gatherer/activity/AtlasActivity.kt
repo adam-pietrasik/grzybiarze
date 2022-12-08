@@ -2,11 +2,13 @@ package pl.grzybiarze.gatherer.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.adapters.AtlasRecyclerView
 import pl.grzybiarze.gatherer.data.MushroomElementModal
+import pl.grzybiarze.gatherer.enum.MushroomStatus
 import pl.grzybiarze.gatherer.repo.ClickListener
 
 class AtlasActivity : ClickListener, AppCompatActivity() {
@@ -16,12 +18,14 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
         setContentView(R.layout.activity_atlas_recycler_view)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewsMushrooms)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this,2)
 
         val data = ArrayList<MushroomElementModal>()
 
         for (i in 1..20){
-            data.add(MushroomElementModal("Dupa","Mushroom $i",true))
+            data.add(MushroomElementModal("cos","MushroomE $i",MushroomStatus.EDIBLE))
+            data.add(MushroomElementModal("cos","MushroomT $i",MushroomStatus.TOXIC))
+            data.add(MushroomElementModal("cos","MushroomI $i",MushroomStatus.INEDIBLE))
         }
 
         val adapter = AtlasRecyclerView(data,this)

@@ -1,13 +1,16 @@
 package pl.grzybiarze.gatherer.adapters
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.data.MushroomElementModal
+import pl.grzybiarze.gatherer.enum.MushroomStatus
 import pl.grzybiarze.gatherer.repo.ClickListener
 
 class AtlasRecyclerView(
@@ -27,6 +30,17 @@ class AtlasRecyclerView(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textView.text = mushroomModalList[position].name
+        when (mushroomModalList[position].status) {
+            MushroomStatus.EDIBLE -> {
+                holder.imageView.setBackgroundResource(R.drawable.food_drumstick)
+            }
+            MushroomStatus.TOXIC -> {
+                holder.imageView.setBackgroundResource(R.drawable.bottle_tonic_skull)
+            }
+            else -> {
+                holder.imageView.setBackgroundResource(R.drawable.food_drumstick_off)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -36,6 +50,7 @@ class AtlasRecyclerView(
     inner class ViewHolder(ItemView: View, clickListener: ClickListener) :
         RecyclerView.ViewHolder(ItemView) {
         private val imageButton: ImageButton = itemView.findViewById(R.id.mushroomImage)
+        val imageView: ImageView = itemView.findViewById(R.id.edible)
         val textView: TextView = itemView.findViewById(R.id.mushroomName)
 
         init {
