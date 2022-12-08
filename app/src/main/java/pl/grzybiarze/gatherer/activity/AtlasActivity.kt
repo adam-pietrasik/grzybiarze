@@ -2,13 +2,14 @@ package pl.grzybiarze.gatherer.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.adapters.AtlasRecyclerView
 import pl.grzybiarze.gatherer.data.MushroomElementModal
 import pl.grzybiarze.gatherer.enum.MushroomStatus
+import pl.grzybiarze.gatherer.fragment.MushroomDetailsFragment
 import pl.grzybiarze.gatherer.repo.ClickListener
 
 class AtlasActivity : ClickListener, AppCompatActivity() {
@@ -34,17 +35,17 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
 
     }
 
-    //private fun replaceFragment(bundle: Bundle) {
-    //    val fragment: Fragment = MoreDetailsAboutTask()
-    //    fragment.arguments = bundle
-    //    getParentFragmentManager()
-    //        .beginTransaction()
-    //        .replace(R.id.mainLayout, fragment)
-    //        .setReorderingAllowed(true)
-    //        .commit()
-    //}
+    private fun replaceFragment(bundle: Bundle?) {
+        val fragment: Fragment = MushroomDetailsFragment()
+        fragment.arguments = bundle
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.atlasLayout, fragment)
+            .setReorderingAllowed(true)
+            .commit()
+    }
 
     override fun onClickItem(position: Int) {
-        println(position)
+        replaceFragment(null)
     }
 }
