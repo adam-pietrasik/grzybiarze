@@ -33,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
             val usernameText = username.text.toString()
             val passwordText = password.text.toString()
             signIn(usernameText, passwordText)
-            getUsers()
         }
 
         forgotPassword.setOnClickListener {
@@ -60,6 +59,9 @@ class LoginActivity : AppCompatActivity() {
                         baseContext, R.string.sign_in_success,
                         Toast.LENGTH_SHORT
                     ).show()
+                    Intent(this, UserActivity::class.java).also {
+                        startActivity(it)
+                    }
                 } else {
                     Log.w(TAG, "signInWithEmail:failure " + auth.currentUser?.email, task.exception)
                     Toast.makeText(
@@ -72,20 +74,5 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateData(email: String, password: String) : Boolean{
         return !(email.isEmpty() || password.isEmpty())
-    }
-
-    private fun getUsers() {
-        val db = Firebase.firestore
-
-        db.collection("users")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
     }
 }

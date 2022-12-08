@@ -1,9 +1,9 @@
 package pl.grzybiarze.gatherer.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import pl.grzybiarze.gatherer.R
 
 class MainActivity : AppCompatActivity() {
