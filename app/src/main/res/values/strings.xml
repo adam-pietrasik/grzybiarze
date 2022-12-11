@@ -27,5 +27,6 @@
 
     <string name="exit">Zamknij</string>
     <string name="name_surname">Name/Surname</string>
+    <string name="mushroom_name">Mushroom Name</string>
 
 </resources>
