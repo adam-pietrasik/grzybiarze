@@ -88,7 +88,7 @@ class RegisterActivity : AppCompatActivity() {
             "profilePicture" to null,
             "isBanned" to null,
         )
-
+        
         // Add a new document with a generated ID
         db.collection("users")
             .document(uid)

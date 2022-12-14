@@ -27,5 +27,6 @@
 
     <string name="exit">Zamknij</string>
     <string name="name_surname">Name/Surname</string>
+    <string name="write_post">Napisz post...</string>
 
 </resources>
