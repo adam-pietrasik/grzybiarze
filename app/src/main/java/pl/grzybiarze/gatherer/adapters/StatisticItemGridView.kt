@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import pl.grzybiarze.gatherer.R
-import pl.grzybiarze.gatherer.data.User
+import pl.grzybiarze.gatherer.model.User
 
 class StatisticItemGridView(
-    private val statisticList: List<User>,
+    private val statisticList: User,
     private val context: Context
 ) : BaseAdapter() {
 
@@ -19,7 +19,7 @@ class StatisticItemGridView(
     private lateinit var statisticName: TextView
 
     override fun getCount(): Int {
-        return statisticList.size
+        return 1
     }
 
     override fun getItem(p0: Int): Any? {
@@ -42,8 +42,8 @@ class StatisticItemGridView(
 
         statisticNumber = convertView2!!.findViewById(R.id.stat_value)
         statisticName = convertView2!!.findViewById(R.id.stat_name)
-        statisticName.text = statisticList[position].email
-        statisticNumber.text = statisticList[position].secondName
+        statisticName.text = statisticList.lastName
+        statisticNumber.text = statisticList.firstName
 
         return convertView2
     }
