@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,18 +12,41 @@
             android:id="@+id/mushroomImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="TODO"
             android:src="@drawable/gatherer_logo_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@null"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="TODO" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/mushroomName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/cardview_light_background"
-            android:text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed nunc vitae nulla viverra gravida et id neque. Nullam at turpis sem. Nulla tincidunt justo sit amet luctus tempor. Quisque auctor quis felis sed tincidunt. Sed accumsan risus a diam consectetur tempor. Aliquam quis finibus orci, id fringilla quam. Ut vel mi imperdiet, porttitor nulla accumsan, accumsan massa. Curabitur blandit gravida sodales. Aenean non facilisis libero. Sed laoreet nibh quis ipsum volutpat dictum. Cras consequat dui quis dui ultricies fermentum. Praesent semper vitae nibh sed consectetur. Donec nec nisi massa.
-
-Pellentesque sed rhoncus ex. Integer volutpat ut ante sit amet accumsan. Suspendisse pretium porta ante eu lacinia. Pellentesque quis dolor magna. Integer nec neque nunc. Etiam nisl risus, molestie malesuada odio at, imperdiet pellentesque odio. Nullam nec ultrices lacus, malesuada fermentum sapien. Donec consequat vel urna vitae accumsan. Quisque ligula nibh, facilisis id consectetur eget, facilisis nec risus. Praesent gravida euismod facilisis. Aliquam erat volutpat. In varius urna quis sem porta elementum. "
+            android:text="Name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/mushroomImage"
+            app:layout_constraintStart_toStartOf="@+id/mushroomImage"
             app:layout_constraintTop_toBottomOf="@+id/mushroomImage" />
+
+        <TextView
+            android:id="@+id/mushroomDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_light_background"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="@+id/mushroomImage"
+            app:layout_constraintStart_toStartOf="@+id/mushroomImage"
+            app:layout_constraintTop_toBottomOf="@+id/mushroomName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

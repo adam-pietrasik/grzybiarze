@@ -17,11 +17,9 @@ import com.squareup.picasso.Picasso;
 
 class AtlasRecyclerView(
     private val mushroomModalList: List<MushroomElementModal>,
-    clickListener: ClickListener
+    private val clickListener: ClickListener
 ) :
     RecyclerView.Adapter<AtlasRecyclerView.ViewHolder>() {
-
-    private val clickListener: ClickListener = clickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

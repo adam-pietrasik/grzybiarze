@@ -24,6 +24,7 @@ import pl.grzybiarze.gatherer.repo.ClickListener
 import java.lang.ref.Reference
 
 class AtlasActivity : ClickListener, AppCompatActivity() {
+    private val data = ArrayList<MushroomElementModal>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,6 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewsMushrooms)
 
         recyclerView.layoutManager = GridLayoutManager(this, 2)
-        val data = ArrayList<MushroomElementModal>()
 
         val db = Firebase.firestore
 
@@ -73,6 +73,8 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
     }
 
     override fun onClickItem(position: Int) {
-        replaceFragment(null)
+        val bundle = Bundle()
+        bundle.putSerializable("mushroom",data[position])
+        replaceFragment(bundle)
     }
 }
