@@ -31,5 +31,4 @@
             android:name=".activity.AtlasActivity"
             android:exported="false" />
     </application>
-
 </manifest>
