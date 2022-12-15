@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Tablica"
+        android:id="@+id/tablica"
+        android:icon="@drawable/ic_baseline_co_present_24"
+        />
+
+
+    <item android:title="Atlas"
+        android:id="@+id/atlas"
+        android:icon="@drawable/gatherer_logo_1"
+        />
+
+
+    <item android:title="Lokalizacje"
+        android:id="@+id/lokalizacja"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        />
+</menu>
