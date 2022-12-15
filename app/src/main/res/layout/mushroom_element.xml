@@ -22,25 +22,33 @@
             android:background="@android:color/transparent"
             android:contentDescription="TODO"
             android:src="@drawable/gatherer_logo_1"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp" />
 
         <TextView
             android:id="@+id/mushroomName"
-            android:layout_width="wrap_content"
+            android:layout_width="100sp"
             android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="26sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
             android:text="@string/mushroom_name"
-            app:layout_constraintBottom_toBottomOf="@+id/mushroomImage"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mushroomImage"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/edible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/mushroomImage"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/mushroomName"
-            android:contentDescription="TODO" />
+            app:layout_constraintTop_toBottomOf="@+id/mushroomImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
