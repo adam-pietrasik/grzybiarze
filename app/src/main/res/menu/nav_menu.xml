@@ -5,25 +5,42 @@
     tools:showIn="navigation_view"
     >
     <item
+        android:title="Profil">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:title="Profil"
+                android:icon="@drawable/ic_baseline_person_24"
+                >
+            </item>
+            <item
+                android:id="@+id/nav_friends"
+                android:title="Znajomi"
+                android:icon="@drawable/ic_baseline_groups_24"
+                >
+            </item>
+        </menu>
+    </item>
+    <item
         android:title="Narzędzia">
         <menu>
             <item
                 android:id="@+id/nav_mapa"
                 android:title="Mapa"
-                android:icon="@drawable/gatherer_logo_1"
+                android:icon="@drawable/ic_baseline_map_24"
 
                 >
             </item>
             <item
                 android:id="@+id/nav_pogoda"
                 android:title="Pogoda"
-                android:icon="@drawable/gatherer_logo_1"
+                android:icon="@drawable/ic_baseline_wb_sunny_24"
                 >
             </item>
             <item
                 android:id="@+id/nav_aparat"
                 android:title="Aparat"
-                android:icon="@drawable/gatherer_logo_1"
+                android:icon="@drawable/ic_baseline_photo_camera_24"
                 >
             </item>
         </menu>
@@ -34,13 +51,13 @@
             <item
                 android:id="@+id/nav_ustawienia"
                 android:title="Ustawienia"
-                android:icon="@drawable/gatherer_logo_1"
+                android:icon="@drawable/ic_baseline_settings_24"
                 >
             </item>
             <item
                 android:id="@+id/nav_about"
                 android:title="O Aplikacji"
-                android:icon="@drawable/gatherer_logo_1"
+                android:icon="@drawable/ic_baseline_info_24"
                 >
             </item>
         </menu>

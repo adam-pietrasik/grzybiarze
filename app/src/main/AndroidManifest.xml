@@ -27,6 +27,7 @@
 
         <activity
             android:name=".activity.MenuActivity"
+            android:theme="@style/Theme.GathererBar"
             android:exported="false">
         </activity>
 
