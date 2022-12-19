@@ -35,14 +35,14 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/name_surname"
-            android:textColor="@color/md_theme_dark_background"
+            android:textColor="@android:color/white"
             android:textSize="24sp" />
     </LinearLayout>
 
     <GridView
         android:id="@+id/stat_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:horizontalSpacing="6dp"
         android:numColumns="3"
         android:verticalSpacing="6dp"

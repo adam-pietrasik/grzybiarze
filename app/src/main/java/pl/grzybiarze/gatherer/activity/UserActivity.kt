@@ -3,6 +3,7 @@ package pl.grzybiarze.gatherer.activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.GridView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -20,11 +21,13 @@ class UserActivity : AppCompatActivity() {
 
     private lateinit var statisticGridView: GridView
     private lateinit var user: User
+    private lateinit var userPanel: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
         statisticGridView = findViewById(R.id.stat_view)
+        userPanel = findViewById(R.id.user_info)
 
         getUserInfo()
 
@@ -49,6 +52,8 @@ class UserActivity : AppCompatActivity() {
                 Log.d(TAG, "Firstname : ${this.user.firstName}")
                 Log.d(TAG, "Profile picture : ${this.user.profilePicture}")
                 Log.d(TAG, "Email : ${this.user.email}")
+
+                userPanel.text = String.format("${this.user.firstName} ${this.user.lastName}")
 
                 val courseAdapter =
                     StatisticItemGridView(statisticList = this.user, this@UserActivity)
