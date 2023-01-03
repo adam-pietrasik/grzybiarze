@@ -1,6 +1,5 @@
 package pl.grzybiarze.gatherer.adapters
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,9 @@ import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.data.MushroomElementModal
 import pl.grzybiarze.gatherer.enum.MushroomStatus
 import pl.grzybiarze.gatherer.repo.ClickListener
-import com.squareup.picasso.Picasso;
 
 class AtlasRecyclerView(
-    private val mushroomModalList: List<MushroomElementModal>,
+    private var mushroomModalList: List<MushroomElementModal>,
     private val clickListener: ClickListener
 ) :
     RecyclerView.Adapter<AtlasRecyclerView.ViewHolder>() {
@@ -26,6 +24,10 @@ class AtlasRecyclerView(
             LayoutInflater.from(parent.context).inflate(R.layout.mushroom_element, parent, false),
             clickListener
         )
+    }
+    public fun clearData(newMushroomModalList: List<MushroomElementModal>){
+        mushroomModalList = newMushroomModalList
+        return
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

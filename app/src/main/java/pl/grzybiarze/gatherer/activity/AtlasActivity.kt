@@ -1,35 +1,39 @@
 package pl.grzybiarze.gatherer.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Switch
+import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.auth.api.signin.internal.Storage
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.adapters.AtlasRecyclerView
 import pl.grzybiarze.gatherer.data.MushroomElementModal
-import pl.grzybiarze.gatherer.enum.MushroomStatus
 import pl.grzybiarze.gatherer.enum.MushroomStatus.*
 import pl.grzybiarze.gatherer.fragment.MushroomDetailsFragment
 import pl.grzybiarze.gatherer.repo.ClickListener
-import java.lang.ref.Reference
 
 class AtlasActivity : ClickListener, AppCompatActivity() {
-    private val data = ArrayList<MushroomElementModal>()
+    private var data = ArrayList<MushroomElementModal>()
+    private lateinit var filterText: EditText
+    private lateinit var adapter: AtlasRecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_atlas_recycler_view)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewsMushrooms)
+
+        val filter = findViewById<Button>(R.id.buttonWyszukaj)
+
+        filterText = findViewById(R.id.editTextFindTask)
+
+        filter.setOnClickListener {
+            filterData();
+        }
 
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
@@ -43,7 +47,7 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
                     val description: String = documents.data["description"] as String
                     val isEdible: String = documents.data["isedible"] as String
                     val photo: String = documents.data["photo"] as String
-                   // Firebase.storage.getReferenceFromUrl(photo.path).getBytes(1024*1024)
+                    // Firebase.storage.getReferenceFromUrl(photo.path).getBytes(1024*1024)
                     when (isEdible) {
                         EDIBLE.toString() -> {
                             data.add(MushroomElementModal(photo, name, description, EDIBLE))
@@ -56,10 +60,20 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
                         }
                     }
                 }
-                val adapter = AtlasRecyclerView(data, this)
+                adapter = AtlasRecyclerView(data, this)
 
                 recyclerView.adapter = adapter
             }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun filterData() {
+        var tempData = data;
+        tempData = tempData.filter { name -> name.name.contains(filterText.text) } as ArrayList<MushroomElementModal>
+        adapter.clearData(tempData)
+        adapter.notifyDataSetChanged()
+
+        return
     }
 
     private fun replaceFragment(bundle: Bundle?) {
@@ -74,7 +88,7 @@ class AtlasActivity : ClickListener, AppCompatActivity() {
 
     override fun onClickItem(position: Int) {
         val bundle = Bundle()
-        bundle.putSerializable("mushroom",data[position])
+        bundle.putSerializable("mushroom", data[position])
         replaceFragment(bundle)
     }
 }
