@@ -29,4 +29,7 @@
     <string name="name_surname">Name/Surname</string>
     <string name="mushroom_name">Mushroom Name</string>
 
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
 </resources>

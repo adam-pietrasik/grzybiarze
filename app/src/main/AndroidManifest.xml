@@ -29,6 +29,17 @@
             android:exported="false" />
         <activity
             android:name=".activity.AtlasActivity"
+            android:theme="@style/Theme.GathererBar"
             android:exported="false" />
+        <activity
+            android:name=".activity.WallActivity"
+            android:theme="@style/Theme.GathererBar"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MapActivity"
+            android:theme="@style/Theme.GathererBar"
+            android:exported="false" />
+
+
     </application>
 </manifest>
