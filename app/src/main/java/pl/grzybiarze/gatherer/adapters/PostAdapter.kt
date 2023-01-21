@@ -13,14 +13,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.helper_classes.Post
 
 class PostAdapter (
-    var posts: List<Post>
+    var posts: List<Post>,
 ) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    val TAG = "PostAdapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.users_posts, parent, false);
@@ -53,11 +58,16 @@ class PostAdapter (
         holder.itemView.findViewById<TextView>(R.id.postText).apply {
             text = posts[position].postText
         }
-        holder.itemView.findViewById<ImageView>(R.id.postImage).apply {
-            if (posts[position].postPictureUri != null) {
-                Log.w("TAG", "onBindViewHolder ${posts[position].postPictureUri}")
+        if (posts[position].postPictureUri != null) {
+            holder.itemView.findViewById<ImageView>(R.id.postImage).apply {
                 visibility = View.VISIBLE
-                // Image uri zamienić na bitmap
+                val storage = Firebase.storage
+                Log.d(TAG, "onBindViewHolder ${posts[position].postPictureUri}")
+                storage.reference.child("${posts[position].postPictureUri}").downloadUrl.addOnSuccessListener {
+                    Glide.with(this.context).load(it).into(this)
+                }.addOnFailureListener {
+                    Log.d(TAG, "onBindViewHolder: ${it.message}")
+                }
             }
         }
     }

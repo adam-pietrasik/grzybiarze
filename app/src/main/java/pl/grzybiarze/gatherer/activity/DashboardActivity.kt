@@ -89,12 +89,6 @@ class DashboardActivity : AppCompatActivity() {
             sendPostDataToServer(post)
         }
 
-        /*val str: Task<Uri> = */
-//        storage.reference.child("${IMG_PATH}1770991056").downloadUrl.addOnSuccessListener {
-//            Log.d(TAG, "onCreate ${it.path}")
-//        }.addOnFailureListener {
-//            Log.d(TAG, "onCreate ${it.message}")
-//        }
         getPostsFromServer()
     }
 
@@ -111,8 +105,7 @@ class DashboardActivity : AppCompatActivity() {
             val storageRef = storage.reference
             this.imgRef =
                 storageRef.child("$IMG_PATH${this.contentUri?.lastPathSegment}")
-            println("${this.imgRef.path} ${this.imgRef.root}" )
-            this.imageUri = "${this.imgRef.root}${this.imgRef.path}"
+            this.imageUri = this.imgRef.path
         }
     }
 
@@ -145,9 +138,10 @@ class DashboardActivity : AppCompatActivity() {
                     val uploadTask = imgRef.putFile(this.contentUri!!)
                     uploadTask.addOnSuccessListener {
                         Log.d(TAG, "sendPostDataToServer() image added")
+                        postAdapter.notifyItemChanged(0)
+                        imageUri = null
                     }
                 }
-                postAdapter.notifyItemChanged(0)
             }
             .addOnFailureListener {
                 ex ->
