@@ -28,8 +28,10 @@ class MainActivity : AppCompatActivity() {
                         startActivity(it)
                     }
                 }
-                Intent(this, DashboardActivity::class.java).also {
-                    startActivity(it)
+                else {
+                    Intent(this, DashboardActivity::class.java).also {
+                        startActivity(it)
+                    }
                 }
             }
 

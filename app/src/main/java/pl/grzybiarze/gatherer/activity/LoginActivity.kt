@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                         baseContext, R.string.sign_in_success,
                         Toast.LENGTH_SHORT
                     ).show()
-                    Intent(this, UserActivity::class.java).also {
+                    Intent(this, DashboardActivity::class.java).also {
                         startActivity(it)
                     }
                 } else {

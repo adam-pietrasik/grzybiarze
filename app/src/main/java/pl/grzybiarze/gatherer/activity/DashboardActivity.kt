@@ -2,21 +2,27 @@ package pl.grzybiarze.gatherer.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.adapters.FollowersAdapter
 import pl.grzybiarze.gatherer.adapters.PostAdapter
@@ -32,73 +38,34 @@ class DashboardActivity : AppCompatActivity() {
     lateinit var addImageButton: ImageButton
     lateinit var writePostEditText: EditText
     lateinit var postAdapter: PostAdapter
-    lateinit var userNameAndSurname: String
-    lateinit var auth: FirebaseAuth
+    var userNameAndSurname = "test"
+    val auth: FirebaseAuth = Firebase.auth
 
     var posts: MutableList<Post> = mutableListOf()
     var followers: MutableList<Followers>  = mutableListOf()
-    var imageUri: Uri? = null
+    var imageUri: String? = null
+    var contentUri: Uri? = null
+    lateinit var imgRef: StorageReference
 
+    val storage = Firebase.storage
+    val currentUser = auth.currentUser
+
+    val IMG_PATH = "${this.currentUser!!.uid}/images/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
         getUserData(currentUser!!.uid)
 
         setLocalizationButton = findViewById(R.id.localizationPinButton)
         addImageButton = findViewById(R.id.addImageButton)
         writePostEditText = findViewById(R.id.writePostEditText)
-//        var followers = mutableListOf(
-//            Followers("KW"),
-//            Followers("KS"),
-//            Followers("AP"),
-//            Followers("MK"),
-//            Followers("FB"),
-//            Followers("JK"),
-//            Followers("MC"),
-//            Followers("VM"),
-//            Followers("JP"),
-//            Followers("PD"),
-//            Followers("TJ"),
-//        )
 
         val followersAdapter = FollowersAdapter(followers)
         val recyclerViewFollowers = findViewById<RecyclerView>(R.id.userFollowers)
         recyclerViewFollowers.adapter = followersAdapter
         recyclerViewFollowers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-//        posts = mutableListOf(
-//            Post(5, 10,
-//                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(2022, 11, 17)),
-//                "Skierniewice",
-//                "Kamil",
-//                "KW",
-//                "Grzyb",
-//                "",
-//                null
-//            ),
-//            Post(5, 10,
-//                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(2022, 11, 17)),
-//                "Skierniewice",
-//                "Kamil",
-//                "KW",
-//                "Grzyb",
-//                "",
-//                null
-//            ),
-//            Post(5, 10,
-//                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(2022, 11, 17)),
-//                "Skierniewice",
-//                "Kamil",
-//                "KW",
-//                "Grzyb",
-//                "",
-//                null
-//            )
-//        )
 
         addImageButton.setOnClickListener {
             openGalleryFolder()
@@ -108,7 +75,6 @@ class DashboardActivity : AppCompatActivity() {
         val recyclerViewPosts = findViewById<RecyclerView>(R.id.usersPosts)
         recyclerViewPosts.adapter = postAdapter
         recyclerViewPosts.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         findViewById<Button>(R.id.addPost).setOnClickListener {
             var post = Post(0
                 , 0
@@ -122,6 +88,14 @@ class DashboardActivity : AppCompatActivity() {
 
             sendPostDataToServer(post)
         }
+
+        /*val str: Task<Uri> = */
+//        storage.reference.child("${IMG_PATH}1770991056").downloadUrl.addOnSuccessListener {
+//            Log.d(TAG, "onCreate ${it.path}")
+//        }.addOnFailureListener {
+//            Log.d(TAG, "onCreate ${it.message}")
+//        }
+        getPostsFromServer()
     }
 
     private fun openGalleryFolder() {
@@ -133,7 +107,12 @@ class DashboardActivity : AppCompatActivity() {
     var galleryResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
-            imageUri = data?.data
+            this.contentUri = data?.data
+            val storageRef = storage.reference
+            this.imgRef =
+                storageRef.child("$IMG_PATH${this.contentUri?.lastPathSegment}")
+            println("${this.imgRef.path} ${this.imgRef.root}" )
+            this.imageUri = "${this.imgRef.root}${this.imgRef.path}"
         }
     }
 
@@ -161,11 +140,31 @@ class DashboardActivity : AppCompatActivity() {
         db.collection("posts")
             .add(post)
             .addOnSuccessListener {
-                Toast.makeText(this, "ADDED", Toast.LENGTH_SHORT).show()
+                posts.add(post)
+                if (this.imageUri != null) run {
+                    val uploadTask = imgRef.putFile(this.contentUri!!)
+                    uploadTask.addOnSuccessListener {
+                        Log.d(TAG, "sendPostDataToServer() image added")
+                    }
+                }
+                postAdapter.notifyItemChanged(0)
             }
             .addOnFailureListener {
                 ex ->
                 Log.e(TAG, "$ex")
+            }
+    }
+
+    private fun getPostsFromServer() {
+        val db = Firebase.firestore
+
+        db.collection("posts")
+            .get()
+            .addOnSuccessListener { posts ->
+                for(post in posts) {
+                    this.posts.add(post.toObject())
+                }
+                postAdapter.notifyDataSetChanged()
             }
     }
 

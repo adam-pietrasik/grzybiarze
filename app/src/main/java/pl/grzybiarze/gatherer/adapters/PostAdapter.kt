@@ -1,5 +1,10 @@
 package pl.grzybiarze.gatherer.adapters
 
+import android.content.ContentResolver
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +13,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import pl.grzybiarze.gatherer.R
 import pl.grzybiarze.gatherer.helper_classes.Post
 
@@ -46,13 +50,14 @@ class PostAdapter (
                 text = posts[position].mushroomType
             }
         }
+        holder.itemView.findViewById<TextView>(R.id.postText).apply {
+            text = posts[position].postText
+        }
         holder.itemView.findViewById<ImageView>(R.id.postImage).apply {
-            if (posts[position].postPicture != null) {
-                Log.w("TAG", "onBindViewHolder ${posts[position].postPicture}")
-                Picasso.with(context).load(posts[position].postPicture)
-                    .fit()
-                    .centerCrop()
-                    .into(this)
+            if (posts[position].postPictureUri != null) {
+                Log.w("TAG", "onBindViewHolder ${posts[position].postPictureUri}")
+                visibility = View.VISIBLE
+                // Image uri zamienić na bitmap
             }
         }
     }
@@ -60,4 +65,5 @@ class PostAdapter (
     override fun getItemCount(): Int {
         return posts.size
     }
+
 }
