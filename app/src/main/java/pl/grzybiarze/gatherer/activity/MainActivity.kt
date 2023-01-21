@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 else {
-                    Intent(this, DashboardActivity::class.java).also {
-                        startActivity(it)
+                    Intent(this, WallActivity::class.java).also {
+                      startActivity(it)
                     }
                 }
             }
